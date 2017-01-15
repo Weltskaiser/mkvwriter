@@ -43,18 +43,17 @@ class FileIOCallback : public IOCallback
 		m_fileHandle = new StdIOCallback(Path, Mode);
 #endif
 	};
-	FileIOCallback(const wchar_t *Path, const open_mode Mode) {		
+
 #ifdef WIN32
+	FileIOCallback(const wchar_t *Path, const open_mode Mode) {		
 #ifdef _UNICODE		
 		m_fileHandle = new WinIOCallback(Path, Mode);
 #else
 		//I have to convert the file name to ANSI
 		m_fileHandle = new WinIOCallback(Path, Mode);
 #endif // _UNICODE
-#else // Under Linux?
-		m_fileHandle = new StdIOCallback(Path, Mode);
-#endif		
 	};
+#endif		
 	~FileIOCallback() {
 		delete m_fileHandle; 
 	};
