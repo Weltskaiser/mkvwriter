@@ -31,4 +31,4 @@ Initial release.
 
 * Had to disable m_AllCues->AddBlockGroup() in MatroskaMuxer.cpp, as this
   function was deprecated.  Need to find out with what it should be replaced.
-  See commit .
+  See commit 29d289d999f16972406a7f79f1d266d686d181d7.
