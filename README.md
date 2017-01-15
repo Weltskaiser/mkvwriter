@@ -2,7 +2,7 @@
 
 ## Background ##
 
-This is a fork of https://github.com/mattgruenke/mkvwriter.git, which had no
+This is a fork of https://github.com/Matroska-Org/mkvwriter.git, which had no
 commits since being transitioned from another repo.  It seemed to be a MKV
 writer plugin for the Helix media player (originally developed by
 RealNetworks).  After seeing a post about it, in the MKV mailing list archives,
