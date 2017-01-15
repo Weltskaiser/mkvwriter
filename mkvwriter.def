@@ -1,6 +1,0 @@
-DESCRIPTION	'RealMedia Player'
-HEAPSIZE	1024
-EXPORTS
-	SetDLLAccessPath
-	RMACreateInstance
-	RMAShutdown
