@@ -54,7 +54,7 @@ void MatroskaTagInfo::SetTagValue(const char *name, const char *value)
 {
 	for (size_t s = 0; s < tags.size(); s++) {
 		MatroskaSimpleTag &currentSimpleTag = tags.at(s);
-		if (!strcmpi(currentSimpleTag.name.GetUTF8().c_str(), name)) {
+		if (!strcasecmp(currentSimpleTag.name.GetUTF8().c_str(), name)) {
 			currentSimpleTag.value.SetUTF8(value);
 			return;
 		}
