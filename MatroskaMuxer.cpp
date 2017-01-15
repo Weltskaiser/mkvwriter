@@ -634,8 +634,10 @@ int MatroskaMuxer::_AddFrame(uint16 trackNo, uint64 timecode, uint32 duration, S
 			}
 		}
 	} else {
+#if 0 // TO_DO
 		if ((uint8)GetChild<KaxTrackType>(*track) == track_video)
 			m_AllCues->AddBlockGroup(*m_MyKaxBlockGroup);
+#endif
 	}
 	return 0;
 };
