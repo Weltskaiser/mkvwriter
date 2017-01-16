@@ -43,16 +43,15 @@
 #ifndef _MATROSKA_MUXER_H_
 #define _MATROSKA_MUXER_H_
 
-#include <time.h>
-// std include's
+#include <ctime>
 #include <vector>
 #include <deque>
 #include <queue>
 #include <exception>
 
 #include "MatroskaSimpleTags.h"
-
 #include "IOCallbackWrapper.h"
+
 // libebml includes
 #include "ebml/IOCallback.h"
 #include "ebml/StdIOCallback.h"
