@@ -18,7 +18,7 @@ set( headers
     ${h_dir}/MatroskaSimpleTags.h
 )
 
-add_library( mkvwriter SHARED ${sources} )
+add_library( mkvwriter ${sources} )
 
 target_link_libraries( mkvwriter ${EBML_LIBRARY} ${Matroska_LIBRARY} )
 
