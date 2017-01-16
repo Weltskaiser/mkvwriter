@@ -35,6 +35,11 @@
 
 */
 
+
+#ifndef _MATROSKA_SIMPLE_TAGS_H_
+#define _MATROSKA_SIMPLE_TAGS_H_
+
+
 #include <vector>
 
 #include "ebml/EbmlTypes.h"
@@ -74,4 +79,7 @@ public:
 
 
 } // namespace mkvwriter
+
+
+#endif // _MATROSKA_SIMPLE_TAGS_H_
 
