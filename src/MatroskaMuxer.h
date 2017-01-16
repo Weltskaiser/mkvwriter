@@ -90,7 +90,7 @@
 #include "matroska/KaxVersion.h"
 
 // Our default timecode scale
-#define TIMECODE_SCALE  1000000
+static const uint64 DefaultTimecodeScale = 1000000;
 
 using namespace LIBEBML_NAMESPACE;
 using namespace LIBMATROSKA_NAMESPACE;

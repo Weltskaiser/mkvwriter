@@ -70,7 +70,7 @@ MatroskaMuxer::MatroskaMuxer()
 	m_prevTimecode = 0xFFFFFFFFFFFFFFFF;
 	m_prevTrack = 0xFFFF;
 	m_lastTimecode = 0;
-	m_timecodeScale = TIMECODE_SCALE;
+	m_timecodeScale = DefaultTimecodeScale;
 	
 	Set_ClusterLimits();
 
