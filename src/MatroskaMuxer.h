@@ -50,7 +50,6 @@
 #include <exception>
 
 #include "MatroskaSimpleTags.h"
-#include "IOCallbackWrapper.h"
 
 // libebml includes
 #include "ebml/IOCallback.h"
@@ -91,6 +90,8 @@
 
 // Our default timecode scale
 static const uint64 DefaultTimecodeScale = 1000000;
+
+class FileIOCallback;
 
 class KaxTimecodeReferenceBlock : public libmatroska::KaxReferenceBlock {
 public:

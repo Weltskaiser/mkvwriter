@@ -41,6 +41,7 @@
 */
 
 #include "MatroskaMuxer.h"
+#include "IOCallbackWrapper.h"
 
 using namespace LIBEBML_NAMESPACE;
 using namespace LIBMATROSKA_NAMESPACE;
