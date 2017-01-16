@@ -17,14 +17,18 @@ platforms.
 
 ## Releases ##
 
-### v0.1 ###
+### v0.1.0 - 2017-01-16 ###
 
 Initial release.
 
 * Added CMake buildsystem.
-* Fixed build errors vs. libmatroska v1.4.4
+* Fixed Linux build errors vs. libmatroska v1.4.4
 * Removed everything extraneous
 * Added this README.md
+* Added `mkvwriter` namespace
+* Removed `using namespace` from public headers
+* Restructured sources into src/ and include/
+* Added simple example program that combines multiple JPEG files into a .MKV
 
 
 ## To Do ##
@@ -32,3 +36,4 @@ Initial release.
 * Had to disable m_AllCues->AddBlockGroup() in MatroskaMuxer.cpp, as this
   function was deprecated.  Need to find out with what it should be replaced.
   See commit 29d289d999f16972406a7f79f1d266d686d181d7.
+
