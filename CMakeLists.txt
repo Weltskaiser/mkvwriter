@@ -6,6 +6,10 @@ project( mkvwriter
 
 ## Options ##
 
+option( BuildExamples
+    "Controls whether to build the example programs."
+    TRUE )
+
 
 ## External Dependencies ##
 
@@ -26,5 +30,7 @@ endif()
 ## Subdirectories ##
 
 add_subdirectory( src )
-#add_subdirectory( tools )
 
+if( BuildExamples )
+    add_subdirectory( examples )
+endif()
