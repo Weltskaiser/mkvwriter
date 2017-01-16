@@ -37,6 +37,10 @@
 
 #include "MatroskaSimpleTags.h"
 
+
+using namespace LIBEBML_NAMESPACE;
+
+
 MatroskaSimpleTag::MatroskaSimpleTag()
 {
 	name = L"";

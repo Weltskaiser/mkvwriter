@@ -36,18 +36,18 @@
 */
 
 #include <vector>
+
 #include "ebml/EbmlTypes.h"
 #include "ebml/EbmlString.h"
 #include "ebml/EbmlUnicodeString.h"
 
-using namespace LIBEBML_NAMESPACE;
 
 class MatroskaSimpleTag {
 public:
 	MatroskaSimpleTag();
 
-	UTFstring name;
-	UTFstring value;
+	libebml::UTFstring name;
+	libebml::UTFstring value;
 };
 
 class MatroskaTagInfo {
