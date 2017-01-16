@@ -28,6 +28,7 @@ target_link_libraries( mkvwriter ${EBML_LIBRARY} ${Matroska_LIBRARY} )
 include_directories(
     ${incl}
     ${EBML_INCLUDE_DIRS}
+    ${Matroska_INCLUDE_DIRS}
 )
 
 
