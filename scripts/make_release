@@ -1,0 +1,34 @@
+#!/bin/bash
+
+    # echo each command and exit upon any failures.
+set -ex
+
+
+## Arguments ##
+
+VER=$1
+if ! [ "$VER" ]
+then
+    echo "Error: no version specified" >&2
+    exit 1
+fi
+shift
+
+
+## Setup ##
+
+ROOT=$(dirname $(dirname $0))
+
+
+## Main release ##
+
+ln -s $ROOT mkvwriter-${VER}
+tar -chf mkvwriter-${VER}.tar --exclude=.git mkvwriter-${VER}
+xz mkvwriter-${VER}.tar
+md5sum mkvwriter-${VER}.tar.xz > mkvwriter-${VER}.tar.xz.md5
+rm mkvwriter-${VER}
+
+
+## Cleanup ##
+
+rm -rf mkvwriter-${VER}
