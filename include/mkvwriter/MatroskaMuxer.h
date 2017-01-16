@@ -49,7 +49,7 @@
 #include <queue>
 #include <exception>
 
-#include "MatroskaSimpleTags.h"
+#include "mkvwriter/MatroskaSimpleTags.h"
 
 // libebml includes
 #include "ebml/IOCallback.h"

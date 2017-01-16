@@ -40,7 +40,7 @@
 
 */
 
-#include "MatroskaMuxer.h"
+#include "mkvwriter/MatroskaMuxer.h"
 #include "IOCallbackWrapper.h"
 
 using namespace LIBEBML_NAMESPACE;
