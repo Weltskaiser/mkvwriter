@@ -31,9 +31,8 @@
 #include "WinIOCallback.h"
 #endif // WIN32
 
-using namespace LIBEBML_NAMESPACE;
 
-class FileIOCallback : public IOCallback
+class FileIOCallback : public libebml::IOCallback
 {
 	public:
 	FileIOCallback(const char *Path, const open_mode Mode) {		
