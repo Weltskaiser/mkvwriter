@@ -92,10 +92,7 @@
 // Our default timecode scale
 static const uint64 DefaultTimecodeScale = 1000000;
 
-using namespace LIBEBML_NAMESPACE;
-using namespace LIBMATROSKA_NAMESPACE;
-
-class KaxTimecodeReferenceBlock : public KaxReferenceBlock {
+class KaxTimecodeReferenceBlock : public libmatroska::KaxReferenceBlock {
 public:
    void SetTimecode(int64 refTimecode) { SetReferencedTimecode(refTimecode); };
 };
@@ -157,14 +154,14 @@ public:
 	};
 protected:
 	/// Internal add frame method
-	int _AddFrame(uint16 trackNo, uint64 timecode, uint32 duration, SimpleDataBuffer *data, std::vector<int32> *references = NULL);
+	int _AddFrame(uint16 trackNo, uint64 timecode, uint32 duration, libmatroska::SimpleDataBuffer *data, std::vector<int32> *references = NULL);
 	int _ProcessQueue();
 	int _FlushQueue();
 	bool _WriteAttachments();
 	bool _WriteTags();
 	bool _ChangeClusters(uint64 timecode, bool bForce = false);
 	int _UpdateDuration(double newDuration);	
-	KaxTrackEntry *_LookupTrackNo(uint8 trackNo);
+	libmatroska::KaxTrackEntry *_LookupTrackNo(uint8 trackNo);
 
 	// Output file/filename
 	FileIOCallback *m_outputFile;
@@ -180,7 +177,7 @@ protected:
 		};
 		int64 timecode;
 		int32 duration;
-		SimpleDataBuffer *buffer;
+		libmatroska::SimpleDataBuffer *buffer;
 		std::vector<int32> references;
 	};
 	class MatroskaFrameQueue : public std::queue<MatroskaFrame *> {
@@ -190,14 +187,14 @@ protected:
 	std::vector<MatroskaFrameQueue> m_Queue;
 
 	// Matroska File Elements
-	KaxSegment FileSegment;
+	libmatroska::KaxSegment FileSegment;
 	EbmlVoid *MyDummy;
-	KaxSeekHead *MySeekHead;
-	KaxSeekHead *MySeekHeadOverFill;
-	KaxTracks *m_Tracks;
-	KaxCluster *clust;
-	KaxBlockGroup *m_MyKaxBlockGroup;
-	KaxCues *m_AllCues;
+	libmatroska::KaxSeekHead *MySeekHead;
+	libmatroska::KaxSeekHead *MySeekHeadOverFill;
+	libmatroska::KaxTracks *m_Tracks;
+	libmatroska::KaxCluster *clust;
+	libmatroska::KaxBlockGroup *m_MyKaxBlockGroup;
+	libmatroska::KaxCues *m_AllCues;
 	uint16 m_prevTrack;
 	uint64 m_prevTimecode;
 	uint64 m_lastTimecode;
