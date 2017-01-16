@@ -47,6 +47,9 @@ using namespace LIBEBML_NAMESPACE;
 using namespace LIBMATROSKA_NAMESPACE;
 
 
+namespace mkvwriter {
+
+
 MatroskaMuxer::MatroskaMuxer()
 {
 	m_outputFile = NULL;
@@ -846,3 +849,7 @@ int MatroskaMuxer::CloseFile() {
 
 	return 0;
 };
+
+
+} // namespace mkvwriter
+

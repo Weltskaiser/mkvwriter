@@ -88,6 +88,10 @@
 #include "matroska/KaxAttached.h"
 #include "matroska/KaxVersion.h"
 
+
+namespace mkvwriter {
+
+
 // Our default timecode scale
 static const uint64 DefaultTimecodeScale = 1000000;
 
@@ -212,6 +216,10 @@ protected:
 	uint32 currentClusterSize;
 	uint64 currentClusterBaseTimecode;
 };
+
+
+} // namespace mkvwriter
+
 
 #endif // _MATROSKA_MUXER_H_
 

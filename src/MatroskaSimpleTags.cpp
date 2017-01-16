@@ -41,6 +41,9 @@
 using namespace LIBEBML_NAMESPACE;
 
 
+namespace mkvwriter {
+
+
 MatroskaSimpleTag::MatroskaSimpleTag()
 {
 	name = L"";
@@ -103,3 +106,6 @@ MatroskaTagInfo *MatroskaTagVector::FindTagWithChapterUID(uint64 chapterUID, uin
 
 	return foundTag;
 };
+
+
+} // namespace mkvwriter

@@ -32,6 +32,9 @@
 #endif // WIN32
 
 
+namespace mkvwriter {
+
+
 class FileIOCallback : public libebml::IOCallback
 {
 	public:
@@ -76,5 +79,9 @@ class FileIOCallback : public libebml::IOCallback
 	protected:
 	IOCallback *m_fileHandle;
 };
+
+
+} // namespace mkvwriter
+
 
 #endif // IO_CALLBACK_WRAPPER_H

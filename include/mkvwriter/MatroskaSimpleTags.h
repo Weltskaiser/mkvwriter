@@ -42,6 +42,9 @@
 #include "ebml/EbmlUnicodeString.h"
 
 
+namespace mkvwriter {
+
+
 class MatroskaSimpleTag {
 public:
 	MatroskaSimpleTag();
@@ -68,3 +71,7 @@ public:
 	MatroskaTagInfo *FindTagWithTrackUID(uint64 trackUID);
 	MatroskaTagInfo *FindTagWithChapterUID(uint64 chapterUID, uint64 trackUID = 0);
 };
+
+
+} // namespace mkvwriter
+
