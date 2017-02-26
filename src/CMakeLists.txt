@@ -13,9 +13,9 @@ set( sources
     MatroskaSimpleTags.cpp
 )
 
-set( headers
-    ${h_dir}/MatroskaMuxer.h
-    ${h_dir}/MatroskaSimpleTags.h
+file( GLOB headers
+    LIST_DIRECTORIES false
+    ${h_dir}/*
 )
 
 add_library( mkvwriter ${sources} )
