@@ -10,6 +10,7 @@ set( h_dir ${incl}/mkvwriter )
 
 set( sources
     MatroskaMuxer.cpp
+    MatroskaAttachment.cpp
     MatroskaSimpleTags.cpp
 )
 
