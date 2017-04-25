@@ -53,6 +53,7 @@
 #include <queue>
 #include <exception>
 
+#include "mkvwriter/MatroskaAttachment.h"
 #include "mkvwriter/MatroskaSimpleTags.h"
 
 // libebml includes
@@ -107,6 +108,7 @@ public:
 };
 
 
+
 class MatroskaMuxer {
 public:
 	MatroskaMuxer();
@@ -137,6 +139,10 @@ public:
 	/// \param name UTF-8 tag name
 	/// \param value UTF-8 tag value
 	int Set_Tag(uint8 trackNo, const char *name, const char *value);
+	
+	/// Appends this to the list of attachments.
+	/// \param attachment Properties of the attachment; Muxer takes ownership.
+	void Attach_File(MatroskaAttachment *attachment);
 	
 	int Get_Track_CodecID(uint8 trackNo, std::string &codecID);
 	
@@ -210,6 +216,7 @@ protected:
 	uint64 m_timecodeScale;
 
 	MatroskaTagVector m_Tags;
+	MatroskaAttachmentVector m_Attachments;
 
 	bool m_WriteDuration;
 	bool m_UseLacing;

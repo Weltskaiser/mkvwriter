@@ -86,7 +86,11 @@ MatroskaMuxer::MatroskaMuxer()
 };
 
 MatroskaMuxer::~MatroskaMuxer() {
-	
+    for (MatroskaAttachmentVector::iterator a = m_Attachments.begin(); a != m_Attachments.end(); ++a)
+    {
+        delete *a;
+    }
+    m_Attachments.clear();
 };
 
 int MatroskaMuxer::Set_OutputFilename(const std::string &ouputFilename)
@@ -317,6 +321,11 @@ int MatroskaMuxer::Set_Tag(uint8 trackNo, const char *name, const char *value)
 	return 0;
 };
 
+void MatroskaMuxer::Attach_File(MatroskaAttachment *attachment)
+{
+	m_Attachments.push_back(attachment);
+}
+
 int MatroskaMuxer::Get_Track_CodecID(uint8 trackNo, std::string &codecID)
 {
 	KaxTrackEntry *track = _LookupTrackNo(trackNo);
@@ -455,15 +464,15 @@ bool MatroskaMuxer::WriteHeaders() {
 };
 
 bool MatroskaMuxer::_WriteAttachments() {
-/*	try {
+	try {
 		//wxLogStatus(_T("Matroska Writer: Writing Attachments..."));
 
-		if (inputAttachments->size() > 0) {
+		if (!m_Attachments.empty()) {
 			KaxAttachments & MyAttachments = GetChild<KaxAttachments>(FileSegment);
 
 			KaxAttached *lastAttachment = NULL;		
-			for (uint16 a = 0; a < inputAttachments->size(); a++) {
-				MatroskaAttachment *currentAttachment = inputAttachments->at(a);		
+			for (uint16 a = 0; a < m_Attachments.size(); a++) {
+				MatroskaAttachment *attachment = m_Attachments.at(a);		
 
 				KaxAttached *MyAttachedFile = NULL;	
 				if (lastAttachment != NULL) {
@@ -475,32 +484,32 @@ bool MatroskaMuxer::_WriteAttachments() {
 				}
 				
 				KaxFileUID & MyKaxFileUID = GetChild<KaxFileUID>(*MyAttachedFile);
-				*static_cast<EbmlUInteger *>(&MyKaxFileUID) = currentAttachment->UID;
+				static_cast<EbmlUInteger *>(&MyKaxFileUID)->SetValue(attachment->UID);
 
 				KaxFileName & MyAttachedFile_Filename  = GetChild<KaxFileName>(*MyAttachedFile);
-				*static_cast<EbmlUnicodeString *>(&MyAttachedFile_Filename) = (const wchar_t*)wxConvLibc.cWX2WC(currentAttachment->FileName.c_str());
+				static_cast<EbmlUnicodeString *>(&MyAttachedFile_Filename)->SetValueUTF8(attachment->FileName);
 				
 				KaxMimeType & MyAttachedFile_MimieType  = GetChild<KaxMimeType>(*MyAttachedFile);
-				*static_cast<EbmlString *>(&MyAttachedFile_MimieType) = (const char *)wxConvLibc.cWX2MB(currentAttachment->MimeType.c_str());
+				static_cast<EbmlString *>(&MyAttachedFile_MimieType)->SetValue(attachment->MimeType);
 
 				KaxFileDescription & MyKaxFileDescription  = GetChild<KaxFileDescription>(*MyAttachedFile);
-				*static_cast<EbmlUnicodeString *>(&MyKaxFileDescription) = (const wchar_t*)wxConvLibc.cWX2WC(currentAttachment->Description.c_str());
+				static_cast<EbmlUnicodeString *>(&MyKaxFileDescription)->SetValueUTF8(attachment->Description);
 
 				KaxFileData & MyAttachedFile_FileData  = GetChild<KaxFileData>(*MyAttachedFile);
-				MyAttachedFile_FileData.CopyBuffer(currentAttachment->GetAttachmentData(), currentAttachment->SourceDataLength);
+				MyAttachedFile_FileData.CopyBuffer(attachment->GetAttachmentData(), attachment->GetAttachmentDataLength());
 			}
 			MyAttachments.Render(*m_outputFile);
+			MySeekHead->IndexThis(MyAttachments, FileSegment);
 		}
 		return true;
 	} catch (std::exception &ex) {
-		wxString errMsg;
-		errMsg = _T("Matroska Writer: std::exception in MatroskaWriter::WriteAttachments() - ");
-		errMsg += wxString(ex.what(), wxConvUTF8);
-		wxLogError(errMsg);
+		//wxString errMsg;
+		//errMsg = _T("Matroska Writer: std::exception in MatroskaWriter::WriteAttachments() - ");
+		//errMsg += wxString(ex.what(), wxConvUTF8);
+		//wxLogError(errMsg);
 	}catch (...) {
-		wxLogError(_T("Matroska Writer: Failed to write attachments."));
-		return false;
-	}*/
+		//wxLogError(_T("Matroska Writer: Failed to write attachments."));
+	}
 	return false;
 };
 
@@ -842,6 +851,7 @@ int MatroskaMuxer::CloseFile() {
 	}
 
 	_WriteTags();
+	_WriteAttachments();
 
 	MyDummy->ReplaceWith(*MySeekHead, *m_outputFile);
 
