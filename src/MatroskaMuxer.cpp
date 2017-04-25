@@ -409,7 +409,7 @@ bool MatroskaMuxer::WriteHeaders() {
 
 		//Add info tag for writing app
 		KaxWritingApp & MyKaxWritingApp = GetChild<KaxWritingApp>(MyInfos);		
-		*static_cast<EbmlUnicodeString *>(&MyKaxWritingApp) = m_WritingApp.c_str();
+		*static_cast<EbmlUnicodeString *>(&MyKaxWritingApp) = m_WritingApp;
 
 		std::string muxingapp;
 		muxingapp.append("libebml v");
@@ -420,7 +420,7 @@ bool MatroskaMuxer::WriteHeaders() {
 		muxingappW.SetUTF8(muxingapp);
 
 		KaxMuxingApp & MyKaxMuxingApp = GetChild<KaxMuxingApp>(MyInfos);
-		*static_cast<EbmlUnicodeString *>(&MyKaxMuxingApp) = muxingappW.c_str();
+		*static_cast<EbmlUnicodeString *>(&MyKaxMuxingApp) = muxingappW;
 		
 		KaxDateUTC &MyKaxDateUTC = GetChild<KaxDateUTC>(MyInfos);
 		MyKaxDateUTC.SetEpochDate(time(NULL));
