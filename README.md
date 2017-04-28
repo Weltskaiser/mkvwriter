@@ -17,6 +17,13 @@ the old buildsystem with CMake.  I've only built it for Linux & Android NDK,
 though I welcome contributions from anyone interested in using it on other
 platforms.
 
+## Important ##
+
+The classes currently used in the interface of this library are very fragile.
+Perhaps they weren't intended to be used in such a manner, but this means you're
+advised to statically link this library or risk breakage upon some future update
+to the shared library.
+
 ## License ##
 
 Thanks to Steve, John, and Jory, this library is now licensed under the MIT
@@ -42,6 +49,14 @@ Initial release.
 ### v0.1.1 - 2017-01-29 ###
 
 Re-licensed under MIT license, with permission from all copyright holders.
+
+
+### v0.1.2 - 2017-04-28 ###
+
+Minor fixes & added attachment writing.
+
+* Fixed WritingApp and MuxingApp entries.
+* Added MatroskaMuxer::Attach_File().
 
 
 ## To Do ##
