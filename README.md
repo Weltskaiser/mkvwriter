@@ -51,7 +51,17 @@ Initial release.
 Re-licensed under MIT license, with permission from all copyright holders.
 
 
-### v0.1.2 - 2017-04-28 ###
+### v0.1.2 - 2017-02-26 ###
+
+Minor fixes & build changes to examples/mjpgmuxer.
+
+* Fixed build of examples/mjpgmuxer, when libebml and libmatroska aren't
+  installed in the default system include path.
+* Removed examples from the default/all target.
+* Added separate `examples` target.
+
+
+### v0.1.3 - 2017-04-28 ###
 
 Minor fixes & added attachment writing.
 
