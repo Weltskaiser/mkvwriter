@@ -69,6 +69,14 @@ Minor fixes & added attachment writing.
 * Added MatroskaMuxer::Attach_File().
 
 
+### v0.1.4 - 2017-04-29 ###
+
+Improvements to attachment writing.
+
+* Changed MatroskaMuxer::WriteHeaders() to write any attachments that have been
+  submitted by that point
+
+
 ## To Do ##
 
 * Had to disable m_AllCues->AddBlockGroup() in MatroskaMuxer.cpp, as this
