@@ -455,7 +455,8 @@ bool MatroskaMuxer::WriteHeaders() {
 		uint64 TrackSize = m_Tracks->Render(*m_outputFile);
 		MySeekHead->IndexThis(*m_Tracks, FileSegment);
 		
-		return true;
+		// Lastly, write any attachments that have been submitted by this point.
+		return _WriteAttachments();
 	}catch (...) {
 		//wxLogMessage(_T("MatroskaMuxer: Failed to write headers"));
 		return false;
@@ -473,6 +474,8 @@ bool MatroskaMuxer::_WriteAttachments() {
 			KaxAttached *lastAttachment = NULL;		
 			for (uint16 a = 0; a < m_Attachments.size(); a++) {
 				MatroskaAttachment *attachment = m_Attachments.at(a);		
+				if (!attachment) continue;
+				m_Attachments.at(a) = NULL;
 
 				KaxAttached *MyAttachedFile = NULL;	
 				if (lastAttachment != NULL) {
@@ -497,9 +500,13 @@ bool MatroskaMuxer::_WriteAttachments() {
 
 				KaxFileData & MyAttachedFile_FileData  = GetChild<KaxFileData>(*MyAttachedFile);
 				MyAttachedFile_FileData.CopyBuffer(attachment->GetAttachmentData(), attachment->GetAttachmentDataLength());
+
+				delete attachment;
 			}
 			MyAttachments.Render(*m_outputFile);
 			MySeekHead->IndexThis(MyAttachments, FileSegment);
+
+			m_Attachments.clear();
 		}
 		return true;
 	} catch (std::exception &ex) {
