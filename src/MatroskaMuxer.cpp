@@ -91,6 +91,9 @@ MatroskaMuxer::~MatroskaMuxer() {
         delete *a;
     }
     m_Attachments.clear();
+
+    if (m_outputFile != NULL)
+        delete m_outputFile;
 };
 
 int MatroskaMuxer::Set_OutputFilename(const std::string &ouputFilename)
@@ -434,7 +437,7 @@ bool MatroskaMuxer::WriteHeaders() {
 
 		KaxSegmentUID & MyKaxSegmentUID = GetChild<KaxSegmentUID>(MyInfos);		
 		// Now we need to make a 128-bits UID
-		uint32 *segmentUID = new uint32[4];
+		uint32 *segmentUID = reinterpret_cast<uint32_t*>(std::malloc(4 * sizeof(uint32_t)));
 		srand((unsigned int)time(NULL));
 		segmentUID[0] = rand();
 		srand((unsigned int)time(NULL));
@@ -443,7 +446,7 @@ bool MatroskaMuxer::WriteHeaders() {
 		segmentUID[2] = rand();
 		srand((unsigned int)time(NULL));
 		segmentUID[3] = rand();
-		MyKaxSegmentUID.SetBuffer((const binary *)segmentUID, sizeof(segmentUID)*4);
+		MyKaxSegmentUID.SetBuffer((const binary *)segmentUID, 4 * sizeof(uint32_t));
 
 		uint32 InfoSize = MyInfos.Render(*m_outputFile);
 		MySeekHead->IndexThis(MyInfos, FileSegment);
@@ -689,7 +692,7 @@ int MatroskaMuxer::AddFrame(uint16 trackNo, uint64 timecode, uint32 duration, co
 		if (reference2 != 0)
 			frame->references.push_back(reference2);
 		
-		binary *buffer = new binary[dataSize];
+		binary *buffer = reinterpret_cast<binary*>(std::malloc(dataSize));
 		memcpy(buffer, data, dataSize);
 		frame->buffer = new SimpleDataBuffer(buffer, dataSize, 0);
 
